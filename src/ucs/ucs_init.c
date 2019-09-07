@@ -30,21 +30,21 @@
 
 #include "msp430.h"
 
-#define SET_ACLK_OUT P1SEL |= BIT0; P1DIR |= BIT0   // 设置P1.0为ACLK输出
-#define SET_SMCLK_OUT P2SEL |= BIT2; P2DIR |= BIT2  // 设置P2.2为SMCLK输出
-#define SET_MCLK_OUT P7SEL |= BIT7; P7DIR |= BIT7   // 设置P7.7为MCLK输出
-#define SET_XT1_IN  P5SEL |= BIT4 | BIT5            // 设置P5.4,P5.5为XT1外部晶振输入
-#define SET_XT2_IN  P5SEL |= BIT2 | BIT3            // 设置P5.2,P5.3为XT2外部晶振输入
-#define SET_XT1_ON  UCSCTL6 |= XCAP_3; UCSCTL6 &=~XT1OFF;   // 启动XT1振荡器
-#define SET_XT2_ON  UCSCTL6 &=~XT2OFF;              // 启动XT2振荡器
-#define SET_CLK_SOURCE UCSCTL4=(UCSCTL4&(~(SELA_7|SELS_7|SELM_7)))|SELA_0|SELS__XT2CLK|SELM_3
-                                                    // 设置时钟源
+#define SET_ACLK_OUT    P1SEL |= BIT0; P1DIR |= BIT0    // 设置P1.0为ACLK输出
+#define SET_SMCLK_OUT   P2SEL |= BIT2; P2DIR |= BIT2    // 设置P2.2为SMCLK输出
+#define SET_MCLK_OUT    P7SEL |= BIT7; P7DIR |= BIT7    // 设置P7.7为MCLK输出
+#define SET_XT1_IN      P5SEL |= BIT4 | BIT5            // 设置P5.4,P5.5为XT1外部晶振输入
+#define SET_XT2_IN      P5SEL |= BIT2 | BIT3            // 设置P5.2,P5.3为XT2外部晶振输入
+#define SET_XT1_ON      UCSCTL6 |= XCAP_3; UCSCTL6 &=~XT1OFF;   // 启动XT1振荡器
+#define SET_XT2_ON      UCSCTL6 &=~XT2OFF;              // 启动XT2振荡器
+#define SET_CLK_SOURCE  UCSCTL4=(UCSCTL4&(~(SELA_7|SELS_7|SELM_7)))|SELA_0|SELS__XT2CLK|SELM_3
+                                                        // 设置时钟源
 
 static void WaitForOscillation(void)
 {
     while (SFRIFG1 & OFIFG) {
-        UCSCTL7 &= ~(XT2OFFG + XT1LFOFFG + DCOFFG); // UCS控制寄存器配置: 清除时钟故障标志位
-        SFRIFG1 &= ~OFIFG;                          // 特殊功能寄存器配置: 清除时钟故障标志位
+        UCSCTL7 &= ~(XT2OFFG + XT1LFOFFG + DCOFFG);     // UCS控制寄存器配置: 清除时钟故障标志位
+        SFRIFG1 &= ~OFIFG;                              // 特殊功能寄存器配置: 清除时钟故障标志位
     }
 }
 

@@ -92,7 +92,7 @@ void CalcFreq(void)
             clk_count += TA1R;                  // 恢复实际计数值
             sig_count += TA2R;
 
-            clk_count += (unsigned long)(CLK_ADJUST * clk_count);       // 加入误差调整
+            clk_count += (unsigned long)(CLK_ADJUST * clk_count);   // 加入误差调整
             sig_count += (unsigned long)(SIG_ADJUST * sig_count);
 
             if (clk_count) {
@@ -116,10 +116,10 @@ void CalcFreq(void)
 
 void DispFreq(void)
 {
-    char freq[17]={0};
-    char sigc[17]={0};
-    char clkc[17]={0};
-    char mode[17]={0};
+    char freq[17] = {0};
+    char sigc[17] = {0};
+    char clkc[17] = {0};
+    char mode[17] = {0};
 
     if (freq_result < 10) {                             // Hz
         sprintf(freq, "freq:%-9.7fHz", freq_result);    // 低于10Hz,显示单位Hz，7位小数，1.000 000 0Hz
@@ -152,7 +152,7 @@ void DispFreq(void)
         sprintf(mode, "mode:synchro");
     }
 
-    LCD_Disp_String(sigc, 1, 1);                        // 输出结果
+    LCD_Disp_String(sigc, 1, 1);    // 输出结果
     LCD_Disp_String(clkc, 1, 2);
     LCD_Disp_String(freq, 1, 3);
     LCD_Disp_String(mode, 1, 4);
@@ -160,9 +160,9 @@ void DispFreq(void)
 
 void TA_Measure(void)
 {
-    MeasFreq();                                 // 测量
-    CalcFreq();                                 // 计算频率
-    DispFreq();                                 // 输出结果
+    MeasFreq();                     // 测量
+    CalcFreq();                     // 计算频率
+    DispFreq();                     // 输出结果
 }
 
 #pragma vector = TIMER1_A1_VECTOR
