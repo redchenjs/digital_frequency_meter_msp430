@@ -6,9 +6,9 @@
  *
  *      功能说明: Timer_A相关功能初始化设置,包括捕获模式,定时器,计数器初始化配置。
  *      引脚配置:
- *      		 P2.2(输入口): 同步测量模式中TA2CLK输入,连接CMP_OUT待测信号
- *      		 P2.0(输入口): 周期测量模式中TA1.1捕获输入,连接CMP_OUT待测信号
- *      		 P1.4(输出口): 同步测量模式中D触发器D输入,连接74HC74数据口D
+ *              P2.2(输入口): 同步测量模式中TA2CLK输入,连接CMP_OUT待测信号
+ *              P2.0(输入口): 周期测量模式中TA1.1捕获输入,连接CMP_OUT待测信号
+ *              P1.4(输出口): 同步测量模式中D触发器D输入,连接74HC74数据口D
  */
 
 #include "msp430.h"
@@ -47,7 +47,7 @@ void TA_Count_Stop(void)
 void TA_Timer_Init(void)
 {
     TA0CCR0  = 16383;                       // TA0定时器配置: 0.5s定时
-    TA0CTL 	 = TASSEL_1 + MC_0;             // TA0定时器配置: ACLK,停止计数
+    TA0CTL   = TASSEL_1 + MC_0;             // TA0定时器配置: ACLK,停止计数
     TA0CCTL0 = CCIE;                        // TA0定时器配置: 开启中断
 }
 
